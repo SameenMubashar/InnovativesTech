@@ -7,8 +7,8 @@ export async function GET(request, { params }) {
   const { id } = params;
 
   await ConnectMongoDB();
-  const eventResponse = await user.findOne({ _id: id });
-  return NextResponse.json({ eventResponse }, { status: 200 });
+  const userResponse = await user.findOne({ _id: id });
+  return NextResponse.json({ userResponse }, { status: 200 });
 }
 
 export async function PUT(request, { params }) {

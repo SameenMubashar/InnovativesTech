@@ -34,7 +34,7 @@ const CreateUser = () => {
     // console.log(baseUrl);
 
     try {
-      const res = await fetch(`${baseUrl}/api/eventDetails`, {
+      const res = await fetch(`${baseUrl}/api/userDetails`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -50,7 +50,7 @@ const CreateUser = () => {
         console.log('Error Response:\n', res);
         setFormSubmitting(false);
 
-        throw new Error('Failed to submit event form!');
+        throw new Error('Failed to submit user form!');
       } else {
         resetFormValues();
         setFormSubmitting(false);
@@ -63,7 +63,7 @@ const CreateUser = () => {
     <Card className="mx-auto max-w-sm mt-20">
       <form onSubmit={handleSubmit}>
         <CardHeader>
-          <CardTitle className="text-xl">Create Event</CardTitle>
+          <CardTitle className="text-xl">Create User</CardTitle>
           <CardDescription>
             Enter your information related to the user
           </CardDescription>
@@ -105,7 +105,7 @@ const CreateUser = () => {
               {formSubmitting ? (
                 <FaSpinner size={30} className="animate-spin" />
               ) : (
-                'Create Event'
+                'Create User'
               )}
             </Button>
           </div>

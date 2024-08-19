@@ -22,22 +22,21 @@ const EditUserPage = () => {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
       try {
-        const response = await fetch(
-          `${baseUrl}/api/eventDetails/${currentId}`
-        );
+        const response = await fetch(`${baseUrl}/api/userDetails/${currentId}`);
         const data = await response.json();
 
         if (response.ok) {
           console.log('data fetched successfully', data);
-          setFirstName(data.eventResponse.firstName);
-          setLastName(data.eventResponse.lastName);
-          setEmail(data.eventResponse.email);
+          setFirstName(data.userResponse.firstName);
+          setLastName(data.userResponse.lastName);
+          setEmail(data.userResponse.email);
+          setError('');
         } else {
           console.log('failed to fetch data');
-          setError(data.error || 'Failed to fetch event data');
+          setError(data.error || 'Failed to fetch user data');
         }
       } catch (error) {
-        setError('Failed to fetch event data');
+        setError('Failed to fetch user data');
       }
     };
 
@@ -48,7 +47,7 @@ const EditUserPage = () => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
     try {
-      const response = await fetch(`${baseUrl}/api/eventDetails/${currentId}`, {
+      const response = await fetch(`${baseUrl}/api/userDetails/${currentId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

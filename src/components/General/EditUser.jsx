@@ -15,19 +15,19 @@ const EditUser = ({ data }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Event Details </Button>
+        <Button variant="outline">Edit User Details </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>it Event Details </DialogTitle>
+          <DialogTitle>Edit User Details </DialogTitle>
           <DialogDescription>
-            Make changes to your Event here. Click save when you&apos;re done.
+            Make changes to your User here. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              Event Name
+              User Name
             </Label>
             <Input
               id="name"

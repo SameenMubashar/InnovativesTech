@@ -47,7 +47,7 @@ const UserDetails = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/eventDetails', {
+        const response = await fetch('/api/userDetails', {
           signal: controller.signal,
         });
         const result = await response.json();
@@ -73,21 +73,21 @@ const UserDetails = () => {
     console.log('deleting id:', id);
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-      const response = await fetch(`${baseUrl}/api/eventDetails/${id}`, {
+      const response = await fetch(`${baseUrl}/api/userDetails/${id}`, {
         method: 'DELETE',
       });
 
       if (response.ok) {
-        alert('Event deleted');
+        alert('User deleted');
         console.log(response);
       } else {
         console.log(response);
-        console.error('Failed to delete Event');
+        console.error('Failed to delete User');
         throw new Error('Deletion failed');
       }
     } catch (error) {
-      console.error('Error deleting Event:', error);
-      alert(`Error deleting event: ${error}`);
+      console.error('Error deleting User:', error);
+      alert(`Error deleting user: ${error}`);
     }
   }, []);
 
