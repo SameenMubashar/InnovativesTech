@@ -13,19 +13,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FaSpinner } from 'react-icons/fa';
 
-const CreateEvent = () => {
-  const [eventName, setEventName] = useState('');
-  const [date, setDate] = useState('');
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
+const CreateUser = () => {
+  const [firstName, setfirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
 
   const [formSubmitting, setFormSubmitting] = useState(false);
 
   const resetFormValues = () => {
-    setEventName('');
-    setDate('');
-    setLocation('');
-    setDescription('');
+    setfirstName('');
+    setLastName('');
+    setEmail('');
   };
 
   const handleSubmit = async (e) => {
@@ -42,10 +40,9 @@ const CreateEvent = () => {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
-          eventName,
-          date,
-          location,
-          description,
+          firstName,
+          lastName,
+          email,
         }),
       });
 
@@ -68,51 +65,42 @@ const CreateEvent = () => {
         <CardHeader>
           <CardTitle className="text-xl">Create Event</CardTitle>
           <CardDescription>
-            Enter your information related to the event
+            Enter your information related to the user
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="event-name">Event name</Label>
+              <Label htmlFor="event-name">First name</Label>
               <Input
-                id="event-name"
-                placeholder="Enter event name"
-                value={eventName}
-                onChange={(e) => setEventName(e.target.value)}
+                id="first-name"
+                placeholder="Enter first name"
+                value={firstName}
+                onChange={(e) => setfirstName(e.target.value)}
                 required
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="date">Date</Label>
+              <Label htmlFor="event-name">Last name</Label>
               <Input
-                id="date"
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
+                id="last-name"
+                placeholder="Enter last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 required
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="location">Location</Label>
+              <Label htmlFor="email">email</Label>
               <Input
-                id="location"
-                placeholder="Enter location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                id="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
-            <div className="grid gap-2">
-              <Label htmlFor="description">Description</Label>
-              <Input
-                id="description"
-                placeholder="Enter description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-              />
-            </div>
+
             <Button type="submit" className="w-full">
               {formSubmitting ? (
                 <FaSpinner size={30} className="animate-spin" />
@@ -127,4 +115,4 @@ const CreateEvent = () => {
   );
 };
 
-export default CreateEvent;
+export default CreateUser;

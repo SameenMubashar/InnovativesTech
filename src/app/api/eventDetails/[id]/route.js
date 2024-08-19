@@ -1,4 +1,4 @@
-import event from '@/models/Event';
+import user from '@/models/User';
 import ConnectMongoDB from '@/lib/mongodb';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
@@ -6,68 +6,54 @@ import { NextResponse } from 'next/server';
 export async function GET(request, { params }) {
   const { id } = params;
 
-  const session = await getServerSession();
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
   await ConnectMongoDB();
-  const eventResponse = await event.findOne({ _id: id });
+  const eventResponse = await user.findOne({ _id: id });
   return NextResponse.json({ eventResponse }, { status: 200 });
 }
 
 export async function PUT(request, { params }) {
-  const session = await getServerSession();
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
   const { id } = params;
-  const { eventName, date, location, description } = await request.json();
+  const { firstName, lastName, email } = await request.json();
 
   await ConnectMongoDB();
 
   try {
-    const updatedEvent = await event.findByIdAndUpdate(
+    const updatedUser = await user.findByIdAndUpdate(
       id,
       {
-        eventName,
-        date,
-        location,
-        description,
+        firstName,
+        lastName,
+        email,
       },
       { new: true }
     );
 
-    if (!updatedEvent) {
-      return NextResponse.json({ error: 'Event not found' }, { status: 404 });
+    if (!updatedUser) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     return NextResponse.json(
-      { message: 'Event updated successfully', event: updatedEvent },
+      { message: 'User updated successfully', event: updatedUser },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error updating event:', error);
-    return NextResponse.json({ error: 'Failed to update event' });
+    console.error('Error updating User:', error);
+    return NextResponse.json({ error: 'Failed to update user' });
   }
 }
 
 export async function DELETE(request, { params }) {
   const { id } = params;
-  console.log('at server side, id:', id);
-  const session = await getServerSession();
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+
   await ConnectMongoDB();
 
-  const eventResponse = await event.findOne({ _id: id });
+  const userResponse = await user.findOne({ _id: id });
 
-  if (!eventResponse) {
-    return NextResponse.json({ message: 'Event not found' }, { status: 404 });
+  if (!userResponse) {
+    return NextResponse.json({ message: 'User not found' }, { status: 404 });
   } else {
-    await event.findByIdAndDelete(id);
+    await user.findByIdAndDelete(id);
   }
 
-  return NextResponse.json({ message: 'Event deleted' }, { status: 200 });
+  return NextResponse.json({ message: 'User deleted' }, { status: 200 });
 }

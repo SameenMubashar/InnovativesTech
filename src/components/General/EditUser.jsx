@@ -11,7 +11,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-const EditEvent = ({ data }) => {
+const EditUser = ({ data }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -75,4 +75,4 @@ const EditEvent = ({ data }) => {
   );
 };
 
-export default EditEvent;
+export default EditUser;

@@ -1,5 +1,5 @@
 import ConnectMongoDB from '@/lib/mongodb';
-import event from '@/models/Event';
+import user from '@/models/User';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import validator from 'validator';
@@ -13,7 +13,7 @@ export async function GET(request) {
   await ConnectMongoDB();
 
   try {
-    const allData = await event.find({}).exec();
+    const allData = await user.find({}).exec();
     return NextResponse.json(allData);
   } catch (error) {
     return NextResponse.json(
